@@ -21,6 +21,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ResourceController extends BaseResource
 {
+    protected $methodPaginator = "createPaginator";
+    
     public function indexAction(Request $request) {
         $criteria = $request->get('filter',$this->config->getCriteria());
         $sorting = $request->get('sorting',$this->config->getSorting());
@@ -29,7 +31,7 @@ class ResourceController extends BaseResource
         if ($this->config->isPaginated()) {
             $resources = $this->resourceResolver->getResource(
                 $repository,
-                'createPaginator',
+                $this->methodPaginator,
                 array($criteria, $sorting)
             );
             $maxPerPage = $this->config->getPaginationMaxPerPage();
