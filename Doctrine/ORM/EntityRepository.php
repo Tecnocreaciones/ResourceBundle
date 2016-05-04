@@ -105,7 +105,8 @@ class EntityRepository extends BaseEntityRepository implements ContainerAwareInt
      */
     public function getScalarPaginator(\Doctrine\ORM\QueryBuilder $queryBuilder)
     {
-        $pagerfanta = new \Tecnocreaciones\Bundle\ResourceBundle\Model\Paginator\Paginator(new ArrayAdapter($queryBuilder->getQuery()->getScalarResult()));
+        $pagerfanta = new \Tecnocreaciones\Bundle\ToolsBundle\Model\Paginator\Paginator(new ArrayAdapter($queryBuilder->getQuery()->getScalarResult()));
+        
         $pagerfanta->setContainer($this->container);
         return $pagerfanta;
     }
